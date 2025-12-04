@@ -2,9 +2,6 @@
 
 Your personal AI-powered assistant for career growth, interview preparation, resume building, and smart cover letters.
 
-<p align="center">
-  <img src="./public/logo.png" height="120" />
-</p>
 
 ---
 
@@ -202,8 +199,6 @@ model User {
 }
 ```
 
----
-
 # 🤖 **AI Cover Letter – How It Works**
 
 * User profile fetch hota hai
@@ -213,16 +208,6 @@ model User {
 * DB me store + UI me show hota hai
 
 ---
-
-# 🖼️ **Screenshots**
-
-(Add screenshots to `public/` and rename)
-
-```
-![Home](./public/preview-home.png)
-![Dashboard](./public/preview-dashboard.png)
-![Interview](./public/preview-interview.png)
-![Cover Letter](./public/preview-coverletter.png)
 ```
 
 ---
