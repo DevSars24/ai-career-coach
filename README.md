@@ -2,7 +2,7 @@
 
 ## 🚀 Homepage Preview
 
-<img src="https://raw.githubusercontent.com/DevSars24/ai-career-coach/main/public/homepage-preview.png" width="800" />
+<p align="center"> <img src="./public/homepage-preview" height="120" /> </p>
 
 
 Your personal AI-powered assistant for career growth, interview preparation, resume building, and smart cover letters.
