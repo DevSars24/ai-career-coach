@@ -1,26 +1,26 @@
 export const testimonial = [
   {
     quote:
-      "The AI-powered interview prep was a game-changer. Landed my dream job at a top tech company!",
-    author: "Sarah Chen",
-    image: "https://randomuser.me/api/portraits/women/75.jpg",
-    role: "Software Engineer",
-    company: "Tech Giant Co.",
+      "SarsAI completely transformed the way I prepare for interviews. The AI feedback feels like you're practicing with a real hiring manager.",
+    author: "Adrian Lewis",
+    image: "https://randomuser.me/api/portraits/men/52.jpg",
+    role: "Full-Stack Developer",
+    company: "NovaLabs",
   },
   {
     quote:
-      "The industry insights helped me pivot my career successfully. The salary data was spot-on!",
-    author: "Michael Rodriguez",
-    image: "https://randomuser.me/api/portraits/men/75.jpg",
-    role: "Product Manager",
-    company: "StartUp Inc.",
+      "The career insights dashboard gave me clarity I didn’t even get from my mentors. I negotiated a 35% higher salary using the data.",
+    author: "Emily Zhang",
+    image: "https://randomuser.me/api/portraits/women/68.jpg",
+    role: "Data Analyst",
+    company: "CloudBridge Analytics",
   },
   {
     quote:
-      "My resume's ATS score improved significantly. Got more interviews in two weeks than in six months!",
-    author: "Priya Patel",
-    image: "https://randomuser.me/api/portraits/women/74.jpg",
-    role: "Marketing Director",
-    company: "Global Corp",
+      "Thanks to SarsAI, my resume finally passed ATS filters. I received four interview calls in just ten days. Absolutely worth it!",
+    author: "Carlos Rivera",
+    image: "https://randomuser.me/api/portraits/men/61.jpg",
+    role: "Project Manager",
+    company: "BrightPath Solutions",
   },
 ];

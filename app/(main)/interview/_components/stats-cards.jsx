@@ -5,7 +5,7 @@ export default function StatsCards({ assessments }) {
   const getAverageScore = () => {
     if (!assessments?.length) return 0;
     const total = assessments.reduce(
-      (sum, assessment) => sum + assessment.quizScore,
+      (sum, a) => sum + a.quizScore,
       0
     );
     return (total / assessments.length).toFixed(1);
@@ -19,49 +19,73 @@ export default function StatsCards({ assessments }) {
   const getTotalQuestions = () => {
     if (!assessments?.length) return 0;
     return assessments.reduce(
-      (sum, assessment) => sum + assessment.questions.length,
+      (sum, a) => sum + a.questions.length,
       0
     );
   };
 
+  const cardBase =
+    "relative overflow-hidden border rounded-xl shadow-sm transition-all hover:shadow-xl hover:-translate-y-1 hover:border-purple-500/30";
+
+  const iconWrapper =
+    "p-2 rounded-lg flex items-center justify-center bg-purple-500/10 text-purple-400";
+
   return (
-    <div className="grid gap-4 md:grid-cols-3">
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+    <div className="grid gap-6 md:grid-cols-3">
+      {/* Average Score */}
+      <Card className={cardBase}>
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent pointer-events-none" />
+        <CardHeader className="flex flex-row items-center justify-between pb-2">
           <CardTitle className="text-sm font-medium">Average Score</CardTitle>
-          <Trophy className="h-4 w-4 text-muted-foreground" />
+          <div className={iconWrapper}>
+            <Trophy className="h-5 w-5" />
+          </div>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{getAverageScore()}%</div>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-4xl font-bold tracking-tight">
+            {getAverageScore()}%
+          </p>
+          <p className="text-xs text-muted-foreground mt-1">
             Across all assessments
           </p>
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+      {/* Questions Practiced */}
+      <Card className={cardBase}>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent pointer-events-none" />
+        <CardHeader className="flex flex-row items-center justify-between pb-2">
           <CardTitle className="text-sm font-medium">
             Questions Practiced
           </CardTitle>
-          <Brain className="h-4 w-4 text-muted-foreground" />
+          <div className={iconWrapper}>
+            <Brain className="h-5 w-5" />
+          </div>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{getTotalQuestions()}</div>
-          <p className="text-xs text-muted-foreground">Total questions</p>
+          <p className="text-4xl font-bold tracking-tight">
+            {getTotalQuestions()}
+          </p>
+          <p className="text-xs text-muted-foreground mt-1">Total questions</p>
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+      {/* Latest Score */}
+      <Card className={cardBase}>
+        <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-transparent pointer-events-none" />
+        <CardHeader className="flex flex-row items-center justify-between pb-2">
           <CardTitle className="text-sm font-medium">Latest Score</CardTitle>
-          <Target className="h-4 w-4 text-muted-foreground" />
+          <div className={iconWrapper}>
+            <Target className="h-5 w-5" />
+          </div>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">
+          <p className="text-4xl font-bold tracking-tight">
             {getLatestAssessment()?.quizScore.toFixed(1) || 0}%
-          </div>
-          <p className="text-xs text-muted-foreground">Most recent quiz</p>
+          </p>
+          <p className="text-xs text-muted-foreground mt-1">
+            Most recent quiz
+          </p>
         </CardContent>
       </Card>
     </div>

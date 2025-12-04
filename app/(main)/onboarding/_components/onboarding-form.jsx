@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
+
 import {
   Card,
   CardContent,
@@ -17,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+
 import {
   Select,
   SelectContent,
@@ -26,13 +28,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
 import useFetch from "@/hooks/use-fetch";
 import { onboardingSchema } from "@/app/lib/schema";
 import { updateUser } from "@/actions/user";
 
-const OnboardingForm = ({ industries }) => {
+export default function OnboardingForm({
+  industries,
+  defaultValues = {},
+  mode = "onboarding", // ⭐ onboarding | edit
+}) {
   const router = useRouter();
-  const [selectedIndustry, setSelectedIndustry] = useState(null);
+
+  // ⭐ PRESELECTED INDUSTRY IF EDIT MODE
+  const [selectedIndustry, setSelectedIndustry] = useState(() => {
+    if (!defaultValues?.industry) return null;
+    const base = defaultValues.industry.split("-")[0]; // extract main industry
+    return industries.find((ind) => ind.id === base) || null;
+  });
 
   const {
     loading: updateLoading,
@@ -40,21 +53,31 @@ const OnboardingForm = ({ industries }) => {
     data: updateResult,
   } = useFetch(updateUser);
 
+  // ⭐ REACT HOOK FORM WITH DEFAULT VALUES
   const {
     register,
     handleSubmit,
-    formState: { errors },
     setValue,
     watch,
+    formState: { errors },
   } = useForm({
     resolver: zodResolver(onboardingSchema),
+    defaultValues: {
+      industry: defaultValues?.industry?.split("-")[0] || "",
+      subIndustry: defaultValues?.industry?.split("-")[1]?.replace(/-/g, " ") || "",
+      experience: defaultValues?.experience || "",
+      skills: defaultValues?.skills?.join(", ") || "",
+      bio: defaultValues?.bio || "",
+    },
   });
 
+  const watchIndustry = watch("industry");
+
+  // ⭐ SUBMIT HANDLER
   const onSubmit = async (values) => {
     try {
-      const formattedIndustry = `${values.industry}-${values.subIndustry
-        .toLowerCase()
-        .replace(/ /g, "-")}`;
+      const formattedIndustry =
+        `${values.industry}-${values.subIndustry.toLowerCase().replace(/ /g, "-")}`;
 
       await updateUserFn({
         ...values,
@@ -62,47 +85,61 @@ const OnboardingForm = ({ industries }) => {
       });
     } catch (error) {
       console.error("Onboarding error:", error);
+      toast.error("Something went wrong.");
     }
   };
 
+  // ⭐ SUCCESS HANDLING
   useEffect(() => {
     if (updateResult?.success && !updateLoading) {
-      toast.success("Profile completed successfully!");
-      router.push("/dashboard");
-      router.refresh();
+      toast.success(
+        mode === "onboarding"
+          ? "Profile completed successfully!"
+          : "Profile updated successfully!"
+      );
+
+      if (mode === "onboarding") {
+        router.push("/dashboard");
+      } else {
+        router.refresh();
+      }
     }
   }, [updateResult, updateLoading]);
 
-  const watchIndustry = watch("industry");
-
   return (
-    <div className="flex items-center justify-center bg-background">
+    <div className="flex items-center justify-center">
       <Card className="w-full max-w-lg mt-10 mx-2">
         <CardHeader>
           <CardTitle className="gradient-title text-4xl">
-            Complete Your Profile
+            {mode === "onboarding" ? "Complete Your Profile" : "Edit Profile"}
           </CardTitle>
+
           <CardDescription>
-            Select your industry to get personalized career insights and
-            recommendations.
+            {mode === "onboarding"
+              ? "Select your industry to get personalized insights."
+              : "Update your information to improve your insights."}
           </CardDescription>
         </CardHeader>
+
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+
+            {/* INDUSTRY */}
             <div className="space-y-2">
-              <Label htmlFor="industry">Industry</Label>
+              <Label>Industry</Label>
+
               <Select
                 onValueChange={(value) => {
                   setValue("industry", value);
-                  setSelectedIndustry(
-                    industries.find((ind) => ind.id === value)
-                  );
+                  setSelectedIndustry(industries.find((ind) => ind.id === value));
                   setValue("subIndustry", "");
                 }}
+                defaultValue={defaultValues?.industry?.split("-")[0] || ""}
               >
-                <SelectTrigger id="industry">
+                <SelectTrigger>
                   <SelectValue placeholder="Select an industry" />
                 </SelectTrigger>
+
                 <SelectContent>
                   <SelectGroup>
                     <SelectLabel>Industries</SelectLabel>
@@ -114,26 +151,31 @@ const OnboardingForm = ({ industries }) => {
                   </SelectGroup>
                 </SelectContent>
               </Select>
+
               {errors.industry && (
-                <p className="text-sm text-red-500">
-                  {errors.industry.message}
-                </p>
+                <p className="text-sm text-red-500">{errors.industry.message}</p>
               )}
             </div>
 
+            {/* SUB INDUSTRY */}
             {watchIndustry && (
               <div className="space-y-2">
-                <Label htmlFor="subIndustry">Specialization</Label>
+                <Label>Specialization</Label>
+
                 <Select
                   onValueChange={(value) => setValue("subIndustry", value)}
+                  defaultValue={
+                    defaultValues?.industry?.split("-")[1]?.replace(/-/g, " ") || ""
+                  }
                 >
-                  <SelectTrigger id="subIndustry">
-                    <SelectValue placeholder="Select your specialization" />
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select specialization" />
                   </SelectTrigger>
+
                   <SelectContent>
                     <SelectGroup>
                       <SelectLabel>Specializations</SelectLabel>
-                      {selectedIndustry?.subIndustries.map((sub) => (
+                      {selectedIndustry?.subIndustries?.map((sub) => (
                         <SelectItem key={sub} value={sub}>
                           {sub}
                         </SelectItem>
@@ -141,6 +183,7 @@ const OnboardingForm = ({ industries }) => {
                     </SelectGroup>
                   </SelectContent>
                 </Select>
+
                 {errors.subIndustry && (
                   <p className="text-sm text-red-500">
                     {errors.subIndustry.message}
@@ -149,14 +192,14 @@ const OnboardingForm = ({ industries }) => {
               </div>
             )}
 
+            {/* EXPERIENCE */}
             <div className="space-y-2">
-              <Label htmlFor="experience">Years of Experience</Label>
+              <Label>Years of Experience</Label>
               <Input
-                id="experience"
                 type="number"
                 min="0"
                 max="50"
-                placeholder="Enter years of experience"
+                placeholder="Enter experience"
                 {...register("experience")}
               />
               {errors.experience && (
@@ -166,27 +209,27 @@ const OnboardingForm = ({ industries }) => {
               )}
             </div>
 
+            {/* SKILLS */}
             <div className="space-y-2">
-              <Label htmlFor="skills">Skills</Label>
+              <Label>Skills</Label>
               <Input
-                id="skills"
-                placeholder="e.g., Python, JavaScript, Project Management"
+                placeholder="e.g., React, Python, Project Management"
                 {...register("skills")}
               />
               <p className="text-sm text-muted-foreground">
-                Separate multiple skills with commas
+                Separate skills with commas
               </p>
               {errors.skills && (
                 <p className="text-sm text-red-500">{errors.skills.message}</p>
               )}
             </div>
 
+            {/* BIO */}
             <div className="space-y-2">
-              <Label htmlFor="bio">Professional Bio</Label>
+              <Label>Professional Bio</Label>
               <Textarea
-                id="bio"
-                placeholder="Tell us about your professional background..."
                 className="h-32"
+                placeholder="Tell us about your background..."
                 {...register("bio")}
               />
               {errors.bio && (
@@ -194,14 +237,17 @@ const OnboardingForm = ({ industries }) => {
               )}
             </div>
 
+            {/* SUBMIT BUTTON */}
             <Button type="submit" className="w-full" disabled={updateLoading}>
               {updateLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Saving...
                 </>
-              ) : (
+              ) : mode === "onboarding" ? (
                 "Complete Profile"
+              ) : (
+                "Save Changes"
               )}
             </Button>
           </form>
@@ -209,6 +255,4 @@ const OnboardingForm = ({ industries }) => {
       </Card>
     </div>
   );
-};
-
-export default OnboardingForm;
+}
