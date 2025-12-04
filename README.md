@@ -2,7 +2,7 @@
 
 ## 🚀 Homepage Preview
 
-![Homepage Preview](https://raw.githubusercontent.com/DevSars24/ai-career-coach/main/public/homepage-preview.png)
+![Landing page of our website](https://raw.githubusercontent.com/DevSars24/ai-career-coach/main/public/homepage-preview.png)
 
 
 Your personal AI-powered assistant for career growth, interview preparation, resume building, and smart cover letters.
