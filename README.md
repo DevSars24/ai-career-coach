@@ -1,5 +1,10 @@
 # 🚀 **SarsAI – AI Career Coach**
 
+## 🚀 Homepage Preview
+
+<p align="center"> <img src="./public/homepage-preview" height="120" /> </p>
+
+
 Your personal AI-powered assistant for career growth, interview preparation, resume building, and smart cover letters.
 
 
