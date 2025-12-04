@@ -1,98 +1,111 @@
 # 🚀 **SarsAI – AI Career Coach**
 
-## 🚀 Landing Page of our website 
+## 🚀 Landing Page Preview
 
-![Landing page of our website](https://raw.githubusercontent.com/DevSars24/ai-career-coach/main/public/homepage-preview.png)
+![Landing page](https://raw.githubusercontent.com/DevSars24/ai-career-coach/main/public/homepage-preview.png)
 
-
-Your personal AI-powered assistant for career growth, interview preparation, resume building, and smart cover letters.
-
+SarsAI is your AI-powered personal career assistant designed to accelerate your professional growth through intelligent interview preparation, resume building, real-time insights, and smart cover letter generation.
 
 ---
 
 ## ⭐️ **Features**
 
-SarsAI provides a complete career acceleration toolkit powered by AI:
+SarsAI provides a complete AI-driven toolkit to help users advance their careers:
+
+---
 
 ### 🎯 **1. AI Cover Letter Generator**
 
 * Generates personalized, professional cover letters
 * Uses your profile + job description
-* Format in markdown
-* Uses Gemini 2.5 Flash
+* Outputs clean Markdown formatting
+* Powered by Gemini 2.5 Flash
+
+---
 
 ### 📝 **2. Resume Builder**
 
-* Create, store, and update resumes
-* ATS optimized format
-* Skill-based section generation
+* Create, update, and store multiple resumes
+* ATS-optimized formatting
+* Automatically enhances sections like experience and skills
+
+---
 
 ### 🎤 **3. AI Interview Coach**
 
-* Mock interview
-* Behavior + Technical questions
-* Smart evaluation
-* Score & improvement report
+* Mock interview simulation
+* Behavioral + technical questions
+* Instant evaluation and improvement feedback
+* Score and insights generated through AI
+
+---
 
 ### 📊 **4. Career Dashboard**
 
-* Shows insights
-* Resume performance
-* Applications & history
-* Quick tools access
+* Displays your personalized insights
+* Resume performance and activities
+* History tracking
+* Quick access to all tools in one place
+
+---
 
 ### ⚙️ **5. Smart Onboarding**
 
+Collects and stores essential user information:
+
 * Industry
-* Experience
+* Work experience
 * Skills
-* Bio
-* Stored in database for future AI use
+* Professional bio
+
+This data is reused across all AI tools to generate better, more personalized results.
+
+---
 
 ### 🔐 **6. Authentication (Clerk)**
 
-* Social + Email sign-in
-* Secure user session
-* Auto user linking to database
+* Secure email + social login
+* Session management
+* Automatic linking of users to the database
 
-```
+---
 
 # 🏗️ **Tech Stack**
 
-| Layer        | Technology                             |
-| ------------ | -------------------------------------- |
-| **Frontend** | Next.js 15, React 19, Tailwind CSS     |
-| **UI**       | shadcn/ui, Lucide Icons                |
-| **Auth**     | Clerk                                  |
-| **Database** | PostgreSQL (Neon)                      |
-| **ORM**      | Prisma                                 |
-| **AI Model** | Gemini 2.5 Flash                       |
-| **Styling**  | Custom Tailwind gradients + animations |
+| Layer        | Technology                               |
+| ------------ | ---------------------------------------- |
+| **Frontend** | Next.js 15, React 19, Tailwind CSS       |
+| **UI**       | shadcn/ui, Lucide Icons                  |
+| **Auth**     | Clerk                                    |
+| **Database** | PostgreSQL (Neon)                        |
+| **ORM**      | Prisma                                   |
+| **AI Model** | Gemini 2.5 Flash                         |
+| **Styling**  | Custom Tailwind animations & gradient UI |
 
 ---
-```
+
 # 📂 **Folder Architecture Explained**
 
 ```
 📦 ai-career-coach
 │
 ├── app
-│   ├── (auth)             # Clerk auth routes (sign-in, sign-up)
-│   ├── (main)             # Authenticated application pages
+│   ├── (auth)             # Clerk authentication pages
+│   ├── (main)             # Protected pages for logged-in users
 │   │   ├── dashboard
 │   │   ├── ai-cover-letter
 │   │   ├── interview
 │   │   ├── onboarding
 │   │   ├── resume
 │   │   ├── settings
-│   ├── layout.js          # Root layout
+│   ├── layout.js          # Global layout
 │   └── page.js            # Landing page
 │
 ├── components
 │   ├── ui                 # shadcn components
-│   ├── header.jsx         # Navbar
+│   ├── header.jsx         # Navigation bar
 │   ├── hero.jsx           # Hero section
-│   └── theme-provider.jsx # Dark/light theme
+│   └── theme-provider.jsx # Theme configuration
 │
 ├── data
 │   ├── industries.js
@@ -101,66 +114,68 @@ SarsAI provides a complete career acceleration toolkit powered by AI:
 │   └── faqs.js
 │
 ├── lib
-│   ├── prisma.js          # Prisma client
-│   ├── client.js          # Supabase/Gemini helpers (if needed)
-│   └── function.js        # Utility functions
+│   ├── prisma.js          # Prisma client setup
+│   ├── client.js          # Additional client utilities
+│   └── function.js        # Helper functions
 │
-├── actions
+├── actions                # Server actions
 │   ├── onboarding.js
 │   ├── resume.js
 │   ├── interview.js
 │   └── coverletter.js
 │
 ├── prisma
-│   ├── schema.prisma      # DB Schema
+│   └── schema.prisma      # Database schema
 │
-├── public
+├── public                 # Static assets
 │   ├── banner.jpeg
 │   ├── banner2.jpeg
 │   ├── banner3.jpeg
 │   └── logo.png
 │
 └── hooks
-    └── use-fetch.js
+    └── use-fetch.js       # Custom fetching hook
 ```
 
 ---
 
 # 🧠 **Why This Folder Structure?**
 
-### ✔️ **Separation of concerns**
+### ✔️ **Clean Separation of Responsibilities**
 
-* UI components sab ek jagah
-* Server actions alag
-* Prisma + DB alag
-* App routes clean & modular
+* UI components grouped together
+* Server actions isolated
+* Prisma & DB logic separate
+* App routes modular and scalable
 
-### ✔️ **Scalable**
+### ✔️ **Highly Scalable**
 
-Har tool (resume, interview, cover letter) ka apna module.
+Each tool (resume, interview, cover letter) has its own module, making it easy to expand.
 
-### ✔️ **Best practice (Next.js 15)**
+### ✔️ **Next.js 15 Best Practices**
 
-* (auth) → free layouts for public pages
-* (main) → protected routes
-* Server Actions → edge-ready & fast
+* `(auth)` → public routes
+* `(main)` → protected user routes
+* Server Actions → optimized for performance and edge environments
 
 ---
 
 # ⚙️ **Environment Variables**
 
-`.env` →
+Add these to your `.env` file:
 
 ```
 DATABASE_URL="postgresql://..."
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=xxxx
-CLERK_SECRET_KEY=xxxx
-GEMINI_API_KEY=xxxx
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=xxxxx
+CLERK_SECRET_KEY=xxxxx
+GEMINI_API_KEY=xxxxx
 ```
 
 ---
 
-# 🛠️ **Installation & Running Locally**
+# 🛠️ **Installation & Setup**
+
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/your-username/ai-career-coach.git
@@ -168,19 +183,19 @@ cd ai-career-coach
 npm install
 ```
 
-### Generate Prisma Client
+### 2. Generate Prisma Client
 
 ```bash
 npx prisma generate
 ```
 
-### Push Schema to DB
+### 3. Push Database Schema
 
 ```bash
 npx prisma db push
 ```
 
-### Start Dev Server
+### 4. Start the Development Server
 
 ```bash
 npm run dev
@@ -188,9 +203,7 @@ npm run dev
 
 ---
 
-# 🧪 **Prisma Schema Overview**
-
-(Example)
+# 🧪 **Prisma Schema Example**
 
 ```prisma
 model User {
@@ -204,23 +217,23 @@ model User {
 }
 ```
 
-# 🤖 **AI Cover Letter – How It Works**
-
-* User profile fetch hota hai
-* Job description + your skills combine hoti hain
-* Gemini prompt generate hota hai
-* AI letter create karta hai
-* DB me store + UI me show hota hai
-
 ---
-```
+
+# 🤖 **How the AI Cover Letter Generator Works**
+
+1. The app retrieves your profile data
+2. Combines it with your job description
+3. Builds a structured AI prompt
+4. Sends it to Gemini 2.5 Flash
+5. Receives a complete cover letter
+6. Saves it in the database
+7. Displays it in your dashboard
 
 ---
 
 # 🤝 **Contributing**
 
-Pull requests welcome!
-Follow issue templates and maintain code formatting.
+We welcome contributions!
+Please submit pull requests and follow consistent formatting and structure.
 
----
 
