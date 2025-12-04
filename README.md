@@ -1,6 +1,6 @@
 # 🚀 **SarsAI – AI Career Coach**
 
-## 🚀 Homepage Preview
+## 🚀 Landing Page of our website 
 
 ![Landing page of our website](https://raw.githubusercontent.com/DevSars24/ai-career-coach/main/public/homepage-preview.png)
 
