@@ -1,32 +1,32 @@
 export const faqs = [
   {
-    question: "What makes Sensai unique as a career development tool?",
+    question: "What sets Sarsai apart in the AI career ecosystem?",
     answer:
-      "Sensai combines AI-powered career tools with industry-specific insights to help you advance your career. Our platform offers three main features: an intelligent resume builder, a cover letter generator, and an adaptive interview preparation system. Each tool is tailored to your industry and skills, providing personalized guidance for your professional journey.",
+      "Sarsai fuses cutting-edge neural networks with real-time labor market data to architect your ascent. Core arsenal: quantum-tuned resume forge, neural cover letter synthesizer, and adaptive interview simulator. All hyper-personalized to your sector's pulse, forging trajectories that outpace the competition.",
   },
   {
-    question: "How does Sensai create tailored content?",
+    question: "How does Sarsai hyper-customize your arsenal?",
     answer:
-      "Sensai learns about your industry, experience, and skills during onboarding. It then uses this information to generate customized resumes, cover letters, and interview questions. The content is specifically aligned with your professional background and industry standards, making it highly relevant and effective.",
+      "On ingress, Sarsai ingests your vectorized profile—sector, quanta of experience, skill embeddings. It then deploys generative models to sculpt bespoke artifacts: resumes etched with ATS evasion, letters laced with recruiter heuristics, and queries mirroring live adversarial scenarios. Precision-engineered for your narrative's apex.",
   },
   {
-    question: "How accurate and up-to-date are Sensai's industry insights?",
+    question: "How does Sarsai ensure foresight on market flux?",
     answer:
-      "We update our industry insights weekly using advanced AI analysis of current market trends. This includes salary data, in-demand skills, and industry growth patterns. Our system constantly evolves to ensure you have the most relevant information for your career decisions.",
+      "Sarsai's oracle aggregates petabytes of signals—scraped from dark web talent pools to blockchain-verified gigs—refreshed in sub-24-hour cycles via federated learning. Expect delta insights on wage vortices, skill singularities, and sector black holes, arming you for 2026's paradigm shifts.",
   },
   {
-    question: "Is my data secure with Sensai?",
+    question: "Is my neural imprint fortified in Sarsai?",
     answer:
-      "Absolutely. We prioritize the security of your professional information. All data is encrypted and securely stored using industry-standard practices. We use Clerk for authentication and never share your personal information with third parties.",
+      "Impervious. Sarsai deploys post-quantum cryptography and zero-knowledge proofs for your data vault. Auth via Clerk's enclave, with homomorphic ops ensuring no plaintext escapes. Third-party shadows? Non-existent—your essence remains sovereign.",
   },
   {
-    question: "How can I track my interview preparation progress?",
+    question: "How does Sarsai chronicle your interview evolution?",
     answer:
-      "Sensai tracks your performance across multiple practice interviews, providing detailed analytics and improvement suggestions. You can view your progress over time, identify areas for improvement, and receive AI-generated tips to enhance your interview skills based on your responses.",
+      "Sarsai's nexus logs every synaptic exchange in mock arenas, yielding holographic analytics: sentiment heatmaps, latency vectors, and weakness fractals. Track your arc from novice node to apex agent, with emergent AI directives to rewire your edge for the next confrontation.",
   },
   {
-    question: "Can I edit the AI-generated content?",
+    question: "Can I override Sarsai's generative outputs?",
     answer:
-      "Yes! While Sensai generates high-quality initial content, you have full control to edit and customize all generated resumes, cover letters, and other content. Our markdown editor makes it easy to refine the content to perfectly match your needs.",
+      "Affirmative—Sarsai yields the forge, you wield the hammer. Initial outputs are scaffolded for excellence, but our immersive editor (with live preview and semantic diffs) empowers granular tweaks. Sculpt to your exact resonance, no chains attached.",
   },
 ];
