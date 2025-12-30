@@ -1,13 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "randomuser.me",
-      },
-    ],
+  experimental: {
+    // This tells Next.js exactly where your project root is
+    outputFileTracingRoot: __dirname, 
   },
+  // If using Turbopack locally
+  transpilePackages: ['@clerk/nextjs'],
 };
 
 export default nextConfig;
