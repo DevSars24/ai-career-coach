@@ -25,16 +25,16 @@ export default function StatsCards({ assessments }) {
   };
 
   const cardBase =
-    "relative overflow-hidden border rounded-xl shadow-sm transition-all hover:shadow-xl hover:-translate-y-1 hover:border-purple-500/30";
+    "relative overflow-hidden border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-sm transition-all hover:shadow-md hover:-translate-y-1 hover:border-black dark:hover:border-white bg-card text-card-foreground";
 
   const iconWrapper =
-    "p-2 rounded-lg flex items-center justify-center bg-purple-500/10 text-purple-400";
+    "p-2 rounded-lg flex items-center justify-center bg-neutral-100 dark:bg-neutral-900 text-foreground border border-neutral-200 dark:border-neutral-800";
 
   return (
     <div className="grid gap-6 md:grid-cols-3">
       {/* Average Score */}
       <Card className={cardBase}>
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-neutral-500/5 to-transparent pointer-events-none" />
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <CardTitle className="text-sm font-medium">Average Score</CardTitle>
           <div className={iconWrapper}>
@@ -45,7 +45,7 @@ export default function StatsCards({ assessments }) {
           <p className="text-4xl font-bold tracking-tight">
             {getAverageScore()}%
           </p>
-          <p className="text-xs text-muted-foreground mt-1">
+          <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
             Across all assessments
           </p>
         </CardContent>
@@ -53,7 +53,7 @@ export default function StatsCards({ assessments }) {
 
       {/* Questions Practiced */}
       <Card className={cardBase}>
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-neutral-500/5 to-transparent pointer-events-none" />
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <CardTitle className="text-sm font-medium">
             Questions Practiced
@@ -66,13 +66,13 @@ export default function StatsCards({ assessments }) {
           <p className="text-4xl font-bold tracking-tight">
             {getTotalQuestions()}
           </p>
-          <p className="text-xs text-muted-foreground mt-1">Total questions</p>
+          <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">Total questions</p>
         </CardContent>
       </Card>
 
       {/* Latest Score */}
       <Card className={cardBase}>
-        <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-neutral-500/5 to-transparent pointer-events-none" />
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <CardTitle className="text-sm font-medium">Latest Score</CardTitle>
           <div className={iconWrapper}>
@@ -83,7 +83,7 @@ export default function StatsCards({ assessments }) {
           <p className="text-4xl font-bold tracking-tight">
             {getLatestAssessment()?.quizScore.toFixed(1) || 0}%
           </p>
-          <p className="text-xs text-muted-foreground mt-1">
+          <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
             Most recent quiz
           </p>
         </CardContent>

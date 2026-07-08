@@ -386,10 +386,10 @@ export default function ResumeBuilder({ initialContent }) {
           )}
 
           {activeTab === "preview" && resumeMode !== "preview" && (
-            <div className="flex p-3 gap-2 items-center border-2 border-yellow-600 text-yellow-600 rounded mb-2">
-              <AlertTriangle className="h-5 w-5" />
+            <div className="flex p-3 gap-2 items-center border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 text-foreground rounded mb-2">
+              <AlertTriangle className="h-5 w-5 text-amber-500" />
               <span className="text-sm">
-                You will lose editied markdown if you update the form data.
+                You will lose edited markdown if you update the form data.
               </span>
             </div>
           )}
