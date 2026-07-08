@@ -165,12 +165,12 @@ export default function Quiz() {
 
         ${
           isSelected && isCorrect === true && isCorrectOption
-            ? "border-green-600 bg-green-200 text-green-900"
+            ? "border-green-600 bg-green-50 text-green-900 dark:border-green-500 dark:bg-green-950/20 dark:text-green-300"
           : isWrongSelected
-            ? "border-red-600 bg-red-200 text-red-900"
+            ? "border-red-600 bg-red-50 text-red-900 dark:border-red-500 dark:bg-red-950/20 dark:text-red-300"
           : !isCorrect && answers[currentQuestion] && isCorrectOption
-            ? "border-green-600 bg-green-200 text-green-900"
-          : "border-neutral-700 bg-neutral-900 text-white"
+            ? "border-green-600 bg-green-50 text-green-900 dark:border-green-500 dark:bg-green-950/20 dark:text-green-300"
+          : "border-neutral-200 bg-white text-neutral-950 hover:bg-neutral-50 dark:border-neutral-800 dark:bg-black dark:text-neutral-50 dark:hover:bg-neutral-900/50"
         }
       `}
     >
@@ -181,16 +181,16 @@ export default function Quiz() {
           h-4 w-4
           ${
             isSelected && isCorrect === true && isCorrectOption
-              ? "border-green-700 text-green-700 bg-green-600"
+              ? "border-green-600 text-green-600 dark:border-green-500 dark:text-green-400"
             : isWrongSelected
-              ? "border-red-700 text-red-700 bg-red-600"
+              ? "border-red-600 text-red-600 dark:border-red-500 dark:text-red-400"
             : !isCorrect && answers[currentQuestion] && isCorrectOption
-              ? "border-green-700 text-green-700 bg-green-600"
-            : "border-white text-white"
+              ? "border-green-600 text-green-600 dark:border-green-500 dark:text-green-400"
+            : "border-neutral-400 text-neutral-900 dark:border-neutral-600 dark:text-neutral-300"
           }
         `}
       />
-      <Label htmlFor={`option-${index}`}>{option}</Label>
+      <Label htmlFor={`option-${index}`} className="cursor-pointer">{option}</Label>
     </div>
   );
 })}
