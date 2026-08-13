@@ -123,9 +123,141 @@ flowchart TB
     style DB fill:#336791,color:#fff
     style Inngest fill:#FF6C37,color:#fff
 ```
+```
 
 ---
 
+<<<<<<< HEAD
+## 🛠️ Tech Stack & Why We Chose It
+
+### ⚡ Core Framework
+
+| Technology | Version | Why It Matters |
+|---|---|---|
+| **Next.js** | `^15.5.9` | App Router enables server components, server actions, and streaming. Turbopack provides blazing-fast HMR. Eliminates the need for a separate Express backend. |
+| **React** | `^18.3.1` | Concurrent rendering with `Suspense` and `useTransition` enables smooth UX during AI generation waits. |
+
+### 🤖 AI & Intelligence Layer
+
+| Technology | Version | Why It Matters |
+|---|---|---|
+| **@google/generative-ai** | `^0.21.0` | Direct SDK access to **Gemini 2.5 Flash** — Google's fastest model for structured JSON output. Powers quiz generation, resume improvement, cover letters, and industry analysis. |
+
+### 🔐 Authentication
+
+| Technology | Version | Why It Matters |
+|---|---|---|
+| **@clerk/nextjs** | `^6.9.10` | Drop-in auth with JWT session management, social logins, and pre-built UI. Middleware integration protects entire route groups in a single file. |
+| **@clerk/themes** | `^2.2.5` | Syncs Clerk's modal UI with the app's dark/light theme seamlessly. |
+
+### 🗄️ Database & ORM
+
+| Technology | Version | Why It Matters |
+|---|---|---|
+| **PostgreSQL** | Latest | Relational DB with JSONB support — perfect for mixed structured (`User`, `Resume`) and semi-structured (`questions[]`, `salaryRanges[]`) data. |
+| **Prisma** | `^6.2.1` | Type-safe ORM with auto-generated client, schema-first migrations, and `$transaction()` for ACID-compliant multi-step operations. |
+
+### ⚙️ Background Jobs
+
+| Technology | Version | Why It Matters |
+|---|---|---|
+| **Inngest** | `^3.54.0` | Serverless-native event-driven job queue with built-in cron scheduling. Runs the weekly industry insight update without a separate worker server. `step.ai.wrap()` enables durable AI calls that survive failures. |
+
+### 🎨 UI & Styling
+
+| Technology | Version | Why It Matters |
+|---|---|---|
+| **TailwindCSS** | `^3.4.1` | Utility-first CSS for rapid, consistent design directly in JSX. |
+| **Radix UI** | Various | Headless, accessible component primitives (Dialog, Tabs, Accordion) styled with Tailwind. Zero accessibility debt. |
+| **Framer Motion** | `^12.23.26` | Production-grade animations — parallax scrolling, staggered reveals, and the typing cursor in the hero. |
+| **shadcn/ui** | — | Component library built on Radix + Tailwind for consistent Button, Card, Badge, and form components. |
+| **Lucide React** | `^0.471.1` | Crisp, consistent SVG icon set. |
+| **next-themes** | `^0.4.4` | Zero-flash dark/light mode switching integrated with Tailwind's dark variant. |
+
+### 📋 Forms & Validation
+
+| Technology | Version | Why It Matters |
+|---|---|---|
+| **React Hook Form** | `^7.54.2` | Performant form management with minimal re-renders — critical for the multi-section onboarding flow. |
+| **Zod** | `^3.24.1` | Schema-first validation — validates form inputs on the client before hitting server actions. |
+| **@hookform/resolvers** | `^3.10.0` | Bridges Zod schemas directly into React Hook Form without custom validators. |
+
+### 📊 Data Visualization
+
+| Technology | Version | Why It Matters |
+|---|---|---|
+| **Recharts** | `^2.15.0` | Composable charts for salary range bar charts and quiz performance trend lines on the dashboard. |
+
+### 🔧 Utilities
+
+| Technology | Version | Why It Matters |
+|---|---|---|
+| **html2pdf.js** | `^0.10.2` | Client-side PDF generation from resume HTML content — no server-side rendering required. |
+| **react-markdown** | `^9.0.3` | Renders Gemini's Markdown output (cover letters, resume sections) as formatted HTML. |
+| **@uiw/react-md-editor** | `^4.0.5` | Full-featured Markdown editor for the resume builder with live preview. |
+| **date-fns** | `^4.1.0` | Lightweight date utility for formatting timestamps. |
+| **sonner** | `^1.7.1` | Beautiful, accessible toast notifications for quiz feedback and save confirmations. |
+| **react-spinners** | `^0.15.0` | Loading indicators (`BarLoader`) shown during AI generation. |
+| **clsx + tailwind-merge** | — | Compose conditional Tailwind class names safely without conflicts. |
+
+---
+
+## 📁 Project Structure
+
+```
+ai-career-coach/
+│
+├── 📁 app/                          # Next.js App Router
+│   ├── 📁 (auth)/                   # Auth route group (Clerk sign-in/sign-up)
+│   ├── 📁 (main)/                   # Protected main app routes
+│   │   ├── 📁 dashboard/            # Career insights dashboard
+│   │   ├── 📁 interview/            # AI quiz + mock interview
+│   │   │   └── 📁 _components/      # Quiz, QuizResult, StatsCards
+│   │   ├── 📁 resume/               # Resume builder
+│   │   │   └── 📁 _components/      # ResumeBuilder, EntryForm
+│   │   ├── 📁 ai-cover-letter/      # Cover letter generator & list
+│   │   ├── 📁 onboarding/           # First-login industry/skill setup
+│   │   └── 📁 settings/             # User profile settings
+│   ├── 📁 api/
+│   │   └── 📁 inngest/              # Inngest webhook endpoint
+│   ├── layout.js                    # Root layout + ThemeProvider + Clerk
+│   ├── page.js                      # Landing page
+│   └── globals.css                  # Global styles + dot-grid + gradient-title
+│
+├── 📁 actions/                      # Next.js Server Actions ("use server")
+│   ├── cover-letter.js              # CRUD for cover letters
+│   ├── dashboard.js                 # Industry insights generation
+│   ├── interview.js                 # Quiz generation + assessment saving
+│   ├── resume.js                    # Resume save/get/AI-improve
+│   └── user.js                      # User profile + onboarding status
+│
+├── 📁 components/                   # Shared UI components
+│   ├── header.jsx                   # Navbar with auth + theme toggle
+│   ├── hero.jsx                     # Landing hero with typing animation
+│   ├── theme-provider.jsx           # next-themes wrapper
+│   └── 📁 ui/                       # shadcn/ui primitives
+│
+├── 📁 hooks/
+│   └── use-fetch.js                 # Universal async data-fetching hook
+│
+├── 📁 lib/
+│   ├── checkUser.js                 # Clerk → Prisma user sync
+│   ├── prisma.js                    # Prisma client singleton
+│   ├── utils.js                     # cn() utility
+│   └── 📁 inngest/
+│       ├── client.js                # Inngest client init
+│       └── function.js              # generateIndustryInsights cron job
+│
+├── 📁 prisma/
+│   ├── schema.prisma                # DB schema (User, Assessment, Resume...)
+│   └── 📁 migrations/               # Migration history
+│
+├── 📁 data/                         # Static data (industry lists, etc.)
+├── middleware.js                    # Clerk auth middleware + route protection
+├── next.config.mjs                  # Next.js config
+├── tailwind.config.mjs              # Tailwind theme config
+└── package.json                     # Dependencies & scripts
+=======
 ## 🔁 Request Lifecycle
 
 How a single authenticated request flows through the stack, from browser click to database write.
@@ -158,10 +290,15 @@ sequenceDiagram
         SA-->>Page: Response
         Page-->>User: Rendered UI
     end
+>>>>>>> origin/main
 ```
 
 ---
 
+<<<<<<< HEAD
+## 🔍 File-by-File Pseudocode & Key Functions
+
+=======
 ## 🧭 Core User Flows
 
 ### 🎯 Interview Quiz Flow
@@ -394,6 +531,7 @@ ai-career-coach/
 
 ## 🔍 File-by-File Pseudocode & Key Functions
 
+>>>>>>> origin/main
 ---
 
 ### `middleware.js` — Route Guard
@@ -841,6 +979,51 @@ RENDER STATES:
 
 ## 🗄️ Database Schema
 
+<<<<<<< HEAD
+```
+                 ┌────────────────────────────┐
+                 │           User             │
+                 ├────────────────────────────┤
+                 │ id           UUID (PK)     │
+                 │ clerkUserId  unique        │
+                 │ email        unique        │
+                 │ name                       │
+                 │ imageUrl                   │
+                 │ industry ──────────────┐   │
+                 │ bio                   │   │
+                 │ experience  Int       │   │
+                 │ skills      String[]  │   │
+                 └──────┬────────────────┘   │
+                        │                    │
+          ┌─────────────┼──────────────┐     │
+          │             │              │     │
+ ┌────────┴──────┐  ┌───┴──────┐      │     │
+ │  Assessment   │  │  Resume  │      │     │
+ ├───────────────┤  ├──────────┤      │     │
+ │ id    cuid    │  │ id cuid  │      │     │
+ │ userId FK     │  │ userId FK│      │     │
+ │ quizScore     │  │ content  │      │     │
+ │ questions JSON│  │ atsScore │      │     │
+ │ category      │  │ feedback │      │     │
+ │ improvementTip│  └──────────┘      │     │
+ └───────────────┘                    │     │
+                                      │     │
+ ┌────────────────┐   ┌───────────────▼──────────────────┐
+ │  CoverLetter   │   │          IndustryInsight          │
+ ├────────────────┤   ├──────────────────────────────────┤
+ │ id    cuid     │   │ id           cuid                 │
+ │ userId FK      │   │ industry     unique               │
+ │ content MD     │   │ salaryRanges JSON[]               │
+ │ jobDescription │   │ growthRate   Float                │
+ │ companyName    │   │ demandLevel  String               │
+ │ jobTitle       │   │ topSkills    String[]             │
+ │ status String  │   │ marketOutlook String              │
+ └────────────────┘   │ keyTrends    String[]             │
+                      │ recommendedSkills String[]        │
+                      │ lastUpdated  DateTime             │
+                      │ nextUpdate   DateTime             │
+                      └──────────────────────────────────┘
+=======
 ```mermaid
 erDiagram
     User ||--o{ Assessment : "has many"
@@ -901,6 +1084,7 @@ erDiagram
         datetime lastUpdated
         datetime nextUpdate
     }
+>>>>>>> origin/main
 ```
 
 ---
